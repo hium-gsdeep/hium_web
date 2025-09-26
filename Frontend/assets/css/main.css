@@ -1,0 +1,1753 @@
+/******************************************************************
+
+
+	------------------------
+	-- TABLE OF CONTENTS --
+	------------------------
+	
+	--  01. Basic
+	--  02. Preloader
+    --  03. Background Content
+    --  04. Navigation
+    --  05. Section
+    --  06. Section --> Intro
+    --  07. Section --> About
+    --  08. Section --> Service
+    --  09. Section --> Work
+    --  10. Section --> Clients
+    --  11. Section --> Contact
+    --  12. Section --> Footer
+ 
+ 
+ ******************************************************************/
+
+
+
+
+/** 1. Basic
+*******************************************************************/
+
+html
+{
+    font-size: 10px;
+}
+
+body
+{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-style: normal;
+
+    color: #fff;
+    background: #fff;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+
+    letter-spacing: 0;
+
+    color: #fff;
+}
+
+h1
+{
+    font-size: 5rem;
+}
+
+h2
+{
+    font-size: 4rem;
+}
+
+h3
+{
+    font-size: 3.5rem;
+}
+
+h4
+{
+    font-size: 3rem;
+}
+
+h5
+{
+    font-size: 2.5rem;
+}
+
+h6
+{
+    font-size: 2rem;
+}
+
+p
+{
+    font-size: 1.5rem;
+    line-height: 1.74em;
+
+    letter-spacing: .02em;
+}
+
+a,
+a:hover,
+a:focus
+{
+    cursor: pointer;
+    -webkit-transition: all 300ms ease;
+         -o-transition: all 300ms ease;
+            transition: all 300ms ease;
+    text-decoration: none;
+}
+
+a:hover
+{
+    color: #111;
+}
+
+@media (max-width:600px)
+{
+    html
+    {
+        font-size: 8px;
+    }
+}
+
+@media (max-width:500px)
+{
+    html
+    {
+        font-size: 7px;
+    }
+}
+
+
+
+/** 2. Preloader
+*******************************************************************/
+
+.preloader
+{
+    position: fixed;
+    z-index: 100000;
+    bottom: 0;
+    left: 0;
+
+    overflow: hidden;
+
+    width: 100%;
+    height: 100%;
+
+    background: #fff;
+}
+
+.preloader.hide-preloader
+{
+    height: 0;
+    
+    -webkit-transition: .8s ease .3s;
+         -o-transition: .8s ease .3s;
+            transition: .8s ease .3s;
+}
+
+.preloader .spinner
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    display: block;
+
+    width: 50px;
+    height: 50px;
+    margin-top: -25px;
+    margin-left: -25px;
+
+    -webkit-animation: spinner-pulse .6s infinite ease-in-out;
+            animation: spinner-pulse .6s infinite ease-in-out;
+    text-align: center;
+
+    opacity: 1;
+    border-radius: 100%;
+    background-color: #111;
+}
+
+.preloader.hide-preloader .spinner
+{
+    opacity: 0;
+    
+    -webkit-transition: .3s ease;
+         -o-transition: .3s ease;
+            transition: .3s ease;
+}
+
+@-webkit-keyframes spinner-pulse
+{
+    0%
+    {
+        -webkit-transform: scale(0);
+    }
+    100%
+    {
+        -webkit-transform: scale(1.0);
+
+        opacity: 0;
+    }
+}
+
+@keyframes spinner-pulse
+{
+    0%
+    {
+        -webkit-transform: scale(0);
+                transform: scale(0);
+    }
+    100%
+    {
+        -webkit-transform: scale(1.0);
+                transform: scale(1.0);
+
+        opacity: 0;
+    }
+}
+
+
+
+/** 3. Background Content
+*******************************************************************/
+
+.background-content
+{
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 50%;
+
+    overflow: hidden;
+
+    width: 100%;
+    height: 100%;
+
+    -webkit-transform: translate3d(-50%,0,0) !important;
+            transform: translate3d(-50%,0,0) !important;
+}
+
+.background-content-inner
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 110%;
+    height: 110%;
+
+    -webkit-transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+}
+
+.background-content .background-img
+{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: url(../img/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+
+/** 4. Navigation
+*******************************************************************/
+
+.navigation-main
+{
+    position: fixed;
+    z-index: 100 !important;
+    top: 0;
+
+    width: 100%;
+    height: 75px;
+    padding: 0 30px;
+
+    border-bottom: 1px solid rgba(0,0,0,.12);
+    background: #fff;
+    -webkit-box-shadow: 0 0 6px 0 rgba(0,0,0,.14);
+            box-shadow: 0 0 6px 0 rgba(0,0,0,.14);
+}
+
+.navigation-main .container-fluid
+{
+    max-width: 960px;
+}
+
+.navigation-main .navbar-collapse
+{
+    width: 100%;
+}
+
+.navigation-main .navbar-brand
+{
+    padding: 0;
+}
+
+.navigation-main .navbar-brand img
+{
+    position: absolute;
+    top: 50%;
+
+    max-height: 55px;
+    margin: 0;
+    padding: 0;
+
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+}
+
+.navigation-main button
+{
+    font-size: 28px;
+
+    margin-right: 0;
+
+    color: #000;
+}
+
+.navigation-main ul
+{
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.navigation-main ul li a,
+.navigation-main ul li span
+{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 75px;
+
+    display: block;
+
+    margin: 0;
+    padding: 0 15px;
+
+    cursor: pointer;
+    -webkit-transition: all .1s  linear;
+         -o-transition: all .1s  linear;
+            transition: all .1s  linear;
+    letter-spacing: .096em;
+    text-transform: uppercase;
+
+    color: #000;
+    background: none !important;
+}
+
+.navigation-main ul li a:hover,
+.navigation-main ul li span:hover,
+.navigation-main ul li.current a
+{
+    color: #13bbbd;
+}
+
+
+
+/** MEDIA QUERIES  **/
+
+@media (max-width: 1000px)
+{
+    .navigation-main ul li a,
+    .navigation-main ul li span
+    {
+        padding: 0 10px;
+    }
+
+    .navigation-main .container-fluid
+    {
+        padding: 0;
+    }
+
+    .navigation-main
+    {
+        padding: 0;
+    }
+
+    .navbar-header
+    {
+        padding: 0 24px;
+    }
+}
+
+@media (min-width: 841px)
+{
+    .navigation-main .dropdown:hover .dropdown-menu
+    {
+        display: block;
+    }
+}
+
+@media (max-width: 840px)
+{
+    .navigation-main
+    {
+        height: 60px;
+    }
+
+    .navbar-header
+    {
+        float: none;
+
+        margin: 0 !important;
+    }
+
+    .navbar-toggle
+    {
+        line-height: 60px;
+
+        display: block;
+
+        margin-top: -4px !important;
+        margin-bottom: 0 !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    .navbar-collapse
+    {
+        margin: 0 !important;
+        padding: 0;
+
+        border-top: 1px solid transparent;
+        background: #fff;
+        -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+                box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+    }
+
+    .navbar-collapse.collapse
+    {
+        display: none!important;
+    }
+
+    .navbar-nav
+    {
+        float: none!important;
+
+        margin: 7.5px -15px;
+        padding-top: 15px !important;
+        padding-bottom: 26px !important;
+    }
+
+    .navbar-nav > li
+    {
+        float: none;
+    }
+
+    .navbar-nav > li > a
+    {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .navbar-text
+    {
+        float: none;
+
+        margin: 15px 0;
+    }
+
+    .navbar-collapse.collapse.in
+    {
+        display: block !important;
+    }
+
+    .collapsing
+    {
+        overflow: hidden !important;
+    }
+
+    .navigation-main ul li a,
+    .navigation-main ul li span,
+    .navigation-main ul li .dropdown-menu a
+    {
+        line-height: 60px !important;
+
+        padding-left: 40px !important;
+    }
+
+    .navbar-nav .open .dropdown-menu
+    {
+        position: static;
+
+        float: none;
+
+        width: auto;
+        margin-top: 0;
+        padding: 0;
+
+        border: 0;
+        background-color: transparent;
+        -webkit-box-shadow: none;
+                box-shadow: none;
+    }
+
+    .navbar-nav .open .dropdown-menu .dropdown-header,
+    .navbar-nav .open .dropdown-menu > li > a
+    {
+        padding: 0;
+    }
+}
+
+@media (max-height: 840px) and (max-width: 840px)
+{
+    .navigation-main ul li a,
+    .navigation-main ul li span,
+    .navigation-main ul li .dropdown-menu a
+    {
+        line-height: 44px !important;
+    }
+
+    .navigation-main
+    {
+        height: 60px;
+    }
+
+    .navigation-main .navbar-brand img
+    {
+        max-width: 120px;
+    }
+}
+
+@media (max-height: 600px) and (max-width: 840px)
+{
+    .navigation-main ul li a,
+    .navigation-main ul li span,
+    .navigation-main ul li .dropdown-menu a
+    {
+        line-height: 34px !important;
+    }
+}
+
+
+
+/** 5. Section
+*******************************************************************/
+
+section
+{
+    position: relative;
+
+    margin: 0 auto;
+    padding: 16rem 0;
+
+    background: rgba(45, 45, 45, .86);
+}
+
+section.white
+{
+    position: relative;
+
+    background: #fff;
+}
+
+section.white h1,
+section.white h2,
+section.white h3,
+section.white h4,
+section.white h5,
+section.white h6
+{
+    color: #000;
+}
+
+section.white p,
+section.white a,
+section.white span
+{
+    color: #333;
+}
+
+section:last-of-type
+{
+    padding-bottom: 20rem;
+}
+
+section .container-fluid
+{
+    max-width: 980px;
+}
+
+section .headline
+{
+    line-height: 1.4em;
+
+    margin-top: 0;
+    margin-bottom: .9em;
+}
+
+@media (max-width:768px)
+{
+    section .headline br
+    {
+        display: none;
+    }
+}
+
+
+
+/** 6. Section --> Intro
+*******************************************************************/
+
+#intro
+{
+    position: relative;
+
+    height: 100vh;
+}
+
+#intro .container-mid
+{
+    position: absolute;
+    top: 50%;
+
+    width: 100%;
+
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+}
+
+#intro .container-mid h1
+{
+    line-height: 1.2em;
+
+    margin-top: 0;
+    margin-bottom: 1em;
+}
+
+#intro .container-mid p.subline
+{
+    font-size: 2.2rem;
+    line-height: 1.6em;
+
+    display: inline-block;
+
+    margin: 0;
+    margin-right: .8em;
+
+    vertical-align: middle;
+}
+
+#intro .container-mid a
+{
+    font-size: 2rem;
+    line-height: 3.2em;
+
+    position: relative;
+
+    display: inline-block;
+    overflow: hidden;
+
+    width: 3.2em;
+    margin: 0;
+    padding: 0;
+
+    -webkit-transition: .2s ease;
+         -o-transition: .2s ease;
+            transition: .2s ease;
+    text-align: center;
+    vertical-align: middle;
+
+    color: #fff;
+    border-radius: 100%;
+    background: none;
+}
+
+#intro .container-mid a:before
+{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    content: '';
+    -webkit-transition: .15s ease;
+         -o-transition: .15s ease;
+            transition: .15s ease;
+    -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+            transform: scale(1);
+
+    border-radius: 100%;
+    background: #13bbbd;
+}
+
+#intro .container-mid a:hover:before
+{
+    -webkit-transform: scale(0);
+        -ms-transform: scale(0);
+            transform: scale(0);
+}
+
+#intro .container-mid a:after
+{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    content: '';
+    -webkit-transition: .15s ease;
+         -o-transition: .15s ease;
+            transition: .15s ease;
+    -webkit-transform: scale(0);
+        -ms-transform: scale(0);
+            transform: scale(0);
+
+    border-radius: 100%;
+    background: #222;
+}
+
+#intro .container-mid a:hover:after
+{
+    -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+            transform: scale(1);
+}
+
+#intro .container-mid a i
+{
+    position: relative;
+    z-index: 2;
+}
+
+#intro .animation-container
+{
+    -webkit-transition: .5s ease;
+         -o-transition: .5s ease;
+            transition: .5s ease;
+}
+
+#intro .animation-container.animation-fade
+{
+    opacity: 0;
+}
+
+#intro .animation-container.animation-fade.run-animation
+{
+    opacity: 1;
+}
+
+#intro .animation-container.animation-fade-up
+{
+    -webkit-transform: translateY(10vh);
+        -ms-transform: translateY(10vh);
+            transform: translateY(10vh);
+
+    opacity: 0;
+}
+
+#intro .animation-container.animation-fade-up.run-animation
+{
+    -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+            transform: translateY(0);
+
+    opacity: 1;
+}
+
+#intro .animation-container.animation-fade-down
+{
+    -webkit-transform: translateY(-10vh);
+        -ms-transform: translateY(-10vh);
+            transform: translateY(-10vh);
+
+    opacity: 0;
+}
+
+#intro .animation-container.animation-fade-down.run-animation
+{
+    -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+            transform: translateY(0);
+
+    opacity: 1;
+}
+
+#intro .animation-container.animation-fade-left
+{
+    -webkit-transform: translateX(10vh);
+        -ms-transform: translateX(10vh);
+            transform: translateX(10vh);
+
+    opacity: 0;
+}
+
+#intro .animation-container.animation-fade-left.run-animation
+{
+    -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+            transform: translateX(0);
+
+    opacity: 1;
+}
+
+#intro .animation-container.animation-fade-right
+{
+    -webkit-transform: translateX(-10vh);
+        -ms-transform: translateX(-10vh);
+            transform: translateX(-10vh);
+
+    opacity: 0;
+}
+
+#intro .animation-container.animation-fade-right.run-animation
+{
+    -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+            transform: translateX(0);
+
+    opacity: 1;
+}
+
+#intro .home-gif{
+  position: absolute;
+  left: 6%;              /* ← 가로 위치(왼쪽에서 거리). 원하는 만큼 조절 */
+  top: 50%;              /* ← 세로 중앙 */
+  transform: translateY(-50%); /* 세로 정확히 중앙정렬 */
+  z-index: 3;            /* 오버레이/배경 위로 */
+  pointer-events: none;  /* 클릭 방해 X */
+}
+
+#intro .home-gif img{
+  width: 300px;          /* ← 크기 조절 포인트 */
+  max-width: 26vw;       /* 화면이 좁으면 자동 축소 */
+  height: auto;
+  display: block;
+  border-radius: 12px;   /* 선택: 모서리 라운드 */
+}
+
+@media (max-width:1200px)
+{
+    #intro
+    {
+        height: auto;
+    }
+
+    #intro .container-mid
+    {
+        position: relative;
+        top: 0;
+
+        margin: 15vh 0;
+
+        -webkit-transform: translate(0);
+            -ms-transform: translate(0);
+                transform: translate(0);
+    }
+
+    #intro .home-gif img{ max-width: 34vw; }
+}
+
+
+
+/** 7. Section --> About
+*******************************************************************/
+
+#about .subline
+{
+    max-width: 77%;
+    margin: 0 auto 2em auto;
+}
+
+#about .about-item
+{
+    padding-right: 24px;
+    padding-left: 24px;
+}
+
+#about .about-item img
+{
+    margin-top: 1.8em;
+}
+
+#about .about-item p
+{
+    margin-top: 1.8em;
+    margin-bottom: 0;
+}
+
+@media (max-width:768px)
+{
+    #about .subline
+    {
+        max-width: 640px;
+    }
+
+    #about .about-item img
+    {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    #about .about-item p
+    {
+        max-width: 640px;
+        margin-right: auto;
+        margin-left: auto;
+
+        text-align: center;
+    }
+}
+
+
+
+/** 8. Section --> Service
+*******************************************************************/
+
+#service .service-item
+{
+    margin-top: 4rem;
+}
+
+#service .service-item i
+{
+    font-size: 2rem;
+    line-height: 3em;
+
+    display: inline-block;
+
+    width: 3em;
+    margin-right: .8em;
+
+    text-align: center;
+    vertical-align: middle;
+
+    border-radius: 100%;
+    background: #13bbbd;
+}
+
+#service .service-item h5
+{
+    display: inline-block;
+
+    vertical-align: middle;
+}
+
+#service .service-item p
+{
+    margin-top: 1.6em;
+    margin-bottom: 0;
+}
+
+@media (max-width:768px)
+{
+    #service .service-item
+    {
+        text-align: center !important;
+    }
+}
+
+
+
+/** 9. Section --> Work
+*******************************************************************/
+
+#work .work-carousel
+{
+    margin-top: 6rem;
+}
+
+#work .work-carousel .owl-dots
+{
+    position: relative;
+
+    margin-top: 6rem;
+
+    text-align: center;
+}
+
+#work .work-carousel .owl-dots .owl-dot
+{
+    position: relative;
+
+    display: inline-block;
+
+    width: 14px;
+    height: 14px;
+    margin: 0 6px;
+
+    -webkit-transition: .3s ease;
+         -o-transition: .3s ease;
+            transition: .3s ease;
+    vertical-align: middle;
+
+    border-radius: 100%;
+    background: #bdc3c7;
+}
+
+#work .work-carousel .owl-dots .owl-dot.active
+{
+    border-color: rgba(0,0,0,0);
+}
+
+#work .work-carousel .owl-dots .owl-dot:after
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 7px;
+    height: 7px;
+
+    content: '';
+    -webkit-transition: .3s ease;
+         -o-transition: .3s ease;
+            transition: .3s ease;
+    -webkit-transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+
+    opacity: 0;
+    border-radius: 100%;
+    background: #13bbbd;
+}
+
+#work .work-carousel .owl-dots .owl-dot.active:after,
+#work .work-carousel .owl-dots .owl-dot:hover:after
+{
+    opacity: 1;
+}
+
+#work .work-carousel .item
+{
+    position: relative;
+
+    display: block;
+    overflow: hidden;
+
+    min-height: 46rem;
+
+    background: none;
+}
+
+#work .work-carousel .item .bg-image
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-position: center;
+    background-size: cover;
+}
+
+#work .work-carousel .item .info
+{
+    position: absolute;
+    z-index: -4;
+    top: 0;
+    left: 0;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    -webkit-transition: .4s ease;
+         -o-transition: .4s ease;
+            transition: .4s ease;
+    pointer-events: none;
+
+    opacity: 1;
+    background: rgba(10,10,10,.6);
+}
+
+#work .work-carousel .item:hover .info
+{
+    z-index: 2;
+
+    pointer-events: all;
+
+    opacity: 1;
+}
+
+#work .work-carousel .item .info .container-mid
+{
+    position: absolute;
+    top: 50%;
+    left: 0;
+
+    width: 100%;
+
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+    text-align: center;
+}
+
+#work .work-carousel .item .info .container-mid h5
+{
+    -webkit-transform: translateX(2rem);
+        -ms-transform: translateX(2rem);
+            transform: translateX(2rem);
+
+    opacity: 0;
+    color: #fff;
+}
+
+#work .work-carousel .item:hover .info .container-mid h5
+{
+    -webkit-transition: .2s ease .1s;
+         -o-transition: .2s ease .1s;
+            transition: .2s ease .1s;
+    -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+            transform: translateX(0);
+
+    opacity: 1;
+}
+
+#work .work-carousel .item .info .container-mid i
+{
+    font-size: 2rem;
+    line-height: 2.5em;
+
+    display: block;
+
+    width: 2.5em;
+    margin: 1em auto 0 auto;
+
+    -webkit-transform: translateX(-2rem);
+        -ms-transform: translateX(-2rem);
+            transform: translateX(-2rem);
+    text-align: center;
+
+    opacity: 0;
+    color: #fff;
+    border-radius: 100%;
+    background: #13bbbd;
+}
+
+#work .work-carousel .item:hover .info .container-mid i
+{
+    -webkit-transition: .2s ease .1s;
+         -o-transition: .2s ease .1s;
+            transition: .2s ease .1s;
+    -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+            transform: translateX(0);
+
+    opacity: 1;
+}
+
+#work .work-carousel .item .lightbox-wrapper
+{
+    position: absolute;
+
+    display: none;
+
+    opacity: 0;
+}
+
+.featherlight .featherlight-content
+{
+    max-height: 95%;
+    padding: 0;
+
+    border-bottom: 0;
+}
+
+.featherlight .featherlight-content .work-lightbox h1,
+.featherlight .featherlight-content .work-lightbox h2,
+.featherlight .featherlight-content .work-lightbox h3,
+.featherlight .featherlight-content .work-lightbox h4,
+.featherlight .featherlight-content .work-lightbox h5,
+.featherlight .featherlight-content .work-lightbox h6,
+.featherlight .featherlight-content .work-lightbox p
+{
+    color: #111;
+}
+
+.featherlight .featherlight-content  .featherlight-close-icon
+{
+    font-size: 2.4rem;
+    line-height: 2.4em;
+
+    top: .7em;
+    left: .7em;
+
+    width: 2.4em;
+
+    border-radius: 100%;
+    outline: none !important;
+    background: white;
+}
+
+.featherlight .featherlight-content .work-lightbox
+{
+    max-width: 1400px;
+    padding: 0 0 10vh 0;
+
+    text-align: center;
+}
+
+.featherlight .featherlight-content .work-lightbox img
+{
+    margin: 0 auto 7vh auto;
+}
+
+.featherlight .featherlight-content .work-lightbox .description
+{
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 5rem;
+}
+
+.featherlight .featherlight-content .work-lightbox .description h3
+{
+    margin-bottom: .25em;
+
+    text-align: left;
+}
+
+.featherlight .featherlight-content .work-lightbox .description p.subline
+{
+    margin-bottom: 2em;
+
+    letter-spacing: .025em;
+}
+
+.featherlight .featherlight-content .work-lightbox .description p
+{
+    margin-bottom: 2em;
+
+    text-align: left;
+}
+
+/* Work lightbox video */
+.featherlight .featherlight-content .work-lightbox .lightbox-video{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:75vh;   /* 화면 넘치지 않게 */
+  margin:0 auto 7vh;
+}
+
+
+/** 10. Section --> Clients
+*******************************************************************/
+
+#clients .client-feedback
+{
+    padding-top: 8rem; /* 창 높이 */
+}
+
+#clients .client-feedback .client-feedback-item
+{
+    margin-bottom: 5rem;
+}
+
+#clients .client-feedback .client-feedback-item:last-child
+{
+    margin-bottom: 0;
+}
+
+@media (max-width:768px)
+{
+    #clients .client-feedback .client-feedback-item img
+    {
+        margin: 0 auto 3rem auto;
+    }
+
+    #clients .client-feedback .client-feedback-item .text-left
+    {
+        text-align: center;
+    }
+}
+
+#clients .client-feedback .logo {
+  max-width: 300px;     /* ← 로고/깃의 가로 크기 */
+  width: 100%;
+  height: auto;
+}
+
+#clients .client-feedback .client-gif {
+  border-radius: 8px;   /* 선택사항: 모서리 둥글게 */
+}
+
+
+/** 12. Section --> Footer
+*******************************************************************/
+
+#footer
+{
+    position: relative;
+
+    overflow: hidden;
+
+    margin: 0 auto;
+    padding: 6rem 0;
+}
+
+#footer p
+{
+    line-height: 6rem;
+
+    margin: 0;
+}
+
+#footer p a
+{
+    font-weight: 400;
+
+    color: inherit;
+}
+
+#footer .social-icons
+{
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+#footer .social-icons li
+{
+    font-size: 2rem;
+    line-height: 3em;
+
+    position: relative;
+
+    display: inline-block;
+    overflow: hidden;
+
+    width: 3em;
+    height: 3em;
+    margin: 0;
+    margin-right: 1em;
+
+    text-align: center;
+
+    color: #fff;
+    border-radius: 100%;
+    background: none;
+}
+
+#footer .social-icons li:last-child
+{
+    margin-right: 0;
+}
+
+#footer .social-icons li:before
+{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    content: '';
+    -webkit-transition: .15s ease;
+         -o-transition: .15s ease;
+            transition: .15s ease;
+    -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+            transform: scale(1);
+
+    border-radius: 100%;
+    background: #13bbbd;
+}
+
+#footer .social-icons li:hover:before
+{
+    -webkit-transform: scale(0);
+        -ms-transform: scale(0);
+            transform: scale(0);
+}
+
+#footer .social-icons li:after
+{
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    content: '';
+    -webkit-transition: .15s ease;
+         -o-transition: .15s ease;
+            transition: .15s ease;
+    -webkit-transform: scale(0);
+        -ms-transform: scale(0);
+            transform: scale(0);
+
+    border-radius: 100%;
+    background: #222;
+}
+
+#footer .social-icons li:hover:after
+{
+    -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+            transform: scale(1);
+}
+
+#footer .social-icons li a
+{
+    font-size: inherit;
+
+    position: relative;
+    z-index: 3;
+
+    display: block;
+
+    color: #fff;
+    border: none;
+}
+
+
+@media (max-width:768px)
+{
+    #footer p
+    {
+        margin-bottom: 1em;
+    }
+
+    #footer .text-left,
+    #footer .text-right
+    {
+        text-align: center;
+    }
+}
+
+
+/* === Service Upload UI === */
+#service .upload-panel{
+    /* 기존: margin-top:4rem;  만 있었음 */
+    margin: 4rem auto 0;      /* 좌우 auto로 가운데 정렬 */
+    max-width: 1000px;         /* ★ 여기 숫자만 바꾸면 전체 가로 폭이 조절됨 */
+    width: min(92vw, 1000px);  /* 화면이 좁을 땐 자동으로 줄어들게(선택) */
+   /* padding: 0 16px;          /* 양옆 여백(선택) */
+}
+#service .upload-drop{
+    position: relative;
+    width: 100%;
+    min-height: 400px;
+    border: 2px dashed rgba(255,255,255,0.35);
+    border-radius: 16px;
+    background: rgba(255,255,255,0.05);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+#service .upload-drop:focus,
+#service .upload-drop.dragover{
+    border-color: #fff;
+    background: rgba(255,255,255,0.08);
+    box-shadow: 0 0 0 4px rgba(255,255,255,0.08) inset;
+    outline: none;
+}
+#service .upload-input{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    opacity:0.0001;
+    cursor:pointer;
+}
+#service .upload-prompt{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:2rem;
+    color:#fff;
+    pointer-events:none;
+}
+#service .upload-prompt i{
+    font-size:3rem;
+    margin-bottom:1rem;
+    opacity:.9;
+}
+#service .upload-preview{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:none;
+}
+#service .upload-meta{
+    margin-top:1.6rem;
+}
+#service .upload-meta textarea{
+    width:100%;
+    min-height: 100px;
+    padding:1.2rem 1.4rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.06);
+    color:#fff;
+    resize: vertical;
+}
+#service .upload-actions{
+    margin-top:1.2rem;
+    display:flex;
+    gap:1rem;
+    align-items:center;
+    justify-content:center;
+}
+#service .upload-btn{
+    padding:.9rem 2.2rem;
+    border-radius:999px;
+    border:0;
+    color:#111;
+    background:#fff;
+    font-weight:600;
+    letter-spacing:.02em;
+    cursor:pointer;
+    transition: transform .08s ease, box-shadow .2s ease;
+}
+#service .upload-btn:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(0,0,0,.25);
+}
+#service .upload-status{
+    font-size: 1.4rem;
+    opacity: .9;
+}
+
+@media (max-width:768px){
+    #service .upload-drop{ min-height: 260px; }
+}
+
+/* === ABOUT: 이미지 아래선 맞추기 === */
+#about .about-item { 
+    display: flex;               /* p가 이미지 아래에 오도록 수직 스택 */
+    flex-direction: column;
+  }
+  
+  #about .about-item img.img-responsive{
+    width: 100%;
+    height: 260px;               /* ★ 이미지 영역 고정 높이(숫자만 조절) */
+    object-fit: contain;         /* 잘림 없이 표시 */
+    object-position: bottom;     /* ★ 이미지의 '아래'를 맞춰 배치 */
+    margin-bottom: 12px;         /* 이미지-문단 간격 */
+  }
+  
+  /* 화면이 좁을 때는 높이를 줄여서 반응형 */
+  @media (max-width: 992px){
+    #about .about-item img.img-responsive{ height: 200px; }
+  }
+  @media (max-width: 576px){
+    #about .about-item img.img-responsive{ height: 160px; }
+  }
+
+
+/* === Service Upload UI  : 음성 슬라이드 및 선택칸 === */
+/* 접근성용 숨김 라벨 */
+#service .sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+
+/* 선택 UI 래퍼 */
+#service .voice-controls{
+  display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-right:12px;
+}
+
+/* pill 셀렉트 공통 */
+#service .pill-select{ position:relative; display:inline-block; }
+#service .pill-select select{
+  appearance:none; -webkit-appearance:none; -moz-appearance:none;
+  border:none; outline:none; cursor:pointer;
+  height:44px; line-height:44px;
+  padding:0 44px 0 18px;            /* 오른쪽 화살표 공간 */
+  border-radius:9999px;
+  font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+}
+#service .pill-select::after{
+  content:""; position:absolute; right:14px; top:50%; transform:translateY(-50%);
+  width:12px; height:7px; background-repeat:no-repeat; background-size:12px 7px; pointer-events:none;
+}
+
+/* 활성(오렌지) 스타일 */
+#service .pill-select--primary select{
+  background:#5c210a; color:#fff;
+  box-shadow: none; /*0 6px 18px rgba(255,122,69,.35), inset 0 -2px 0 rgba(0,0,0,.12); */
+}
+
+/* 고스트(연한) 스타일 */
+#service .pill-select--ghost select{
+  background:#ffffff; color:#5c210a;
+  box-shadow:inset 0 -2px 0 rgba(0,0,0,.04);
+}
+
+#service .pill-select::after{
+  content:"";
+  position:absolute;
+  right:14px; top:50%;
+  transform:translateY(-50%) rotate(45deg);
+  width:8px; height:8px;
+  border-right:2px solid currentColor;
+  border-bottom:2px solid currentColor;
+}
+
+/* 색상만 다르게 */
+#service .pill-select--primary::after{ color:#fff; }
+#service .pill-select--ghost::after{ color:#5c210a; }
+
+/* 상태 */
+#service .pill-select select:focus{
+  box-shadow:0 0 0 3px rgba(255,122,69,.25), inset 0 -2px 0 rgba(0,0,0,.12);
+}
+#service .pill-select select:hover{ filter:brightness(.98); }
+#service .pill-select select:disabled{ opacity:.55; cursor:not-allowed; }
+
+/* IE 기본 화살표 제거 */
+#service .pill-select select::-ms-expand{ display:none; }
+
+
+/* 가로 슬라이더 래퍼: 선택칸 옆에 깔끔히 들어가도록 */
+#service .h-wrap{
+  display:flex; align-items:center; gap:8px;
+  width:clamp(160px, 24vw, 260px);
+}
+
+/* 값 표시(작은 숫자) */
+#service .h-readout{
+  min-width:28px; text-align:center;
+  font-size:12px; color:#fff; opacity:.9;
+}
+
+/* 가로 range 기본 */
+#service .h-range{
+  -webkit-appearance:none; appearance:none;
+  width:100%; height:16px;
+  background:transparent; border:none; outline:none; cursor:pointer;
+}
+
+/* WebKit: 트랙 & 핸들 */
+#service .h-range::-webkit-slider-runnable-track{
+  height:12px;
+  background:var(--brand-ghost, #F1E4D3);
+  border-radius:9999px;
+  border:none;
+}
+#service .h-range::-webkit-slider-thumb{
+  -webkit-appearance:none; appearance:none;
+  width:20px; height:20px; margin-top:-4px; /* 트랙 중앙 보정 */
+  background:var(--brand, #5c210a);
+  border-radius:50%; border:none; box-shadow:none;
+}
+
+/* Firefox: 트랙 & 핸들 */
+#service .h-range::-moz-range-track{
+  height:12px;
+  background:var(--brand-ghost, #F1E4D3);
+  border-radius:9999px; border:none;
+}
+#service .h-range::-moz-range-thumb{
+  width:20px; height:20px;
+  background:var(--brand, #5c210a);
+  border:none; border-radius:50%; box-shadow:none;
+}
+
+/* 포커스/호버 효과 최소화 */
+#service .h-range:focus{ outline:none; }
+#service .h-range:hover{ filter:none; }
+
+
+
+
+/* === Service: 텍스트 80 / WAV 20 분할 === */
+#service .meta-row{
+  display:flex; gap:14px; align-items:stretch;
+}
+#service .meta-text{ flex: 0 1 80%; }
+#service .meta-audio{ flex: 0 1 20%; min-width: 180px; }
+
+/* 반응형: 모바일에서는 세로 스택 */
+@media (max-width: 992px){
+  #service .meta-row{ flex-direction:column; }
+  #service .meta-text, #service .meta-audio{ flex-basis:100%; min-width:0; }
+}
+
+/* textarea 높이/스타일 보강 */
+#service .meta-text textarea{
+  width:100%;
+  min-height: 160px;             /* 드롭존과 균형 맞춤 */
+  padding:1.2rem 1.4rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.06);
+  color:#fff;
+  resize: vertical;
+}
+
+/* WAV 미니 드롭존 (큰 드롭존과 톤 맞춤) */
+#service .mini-drop{
+  position:relative;
+  width:100%;
+  min-height:160px;
+  border:1px solid rgba(255,255,255,0.35);
+  border-radius:16px;
+  background: rgba(255,255,255,0.05);
+  overflow:hidden;
+  cursor:pointer;
+  transition: all .2s ease;
+  display:flex; align-items:center; justify-content:center;
+}
+#service .mini-drop:focus,
+#service .mini-drop.dragover{
+  border-color:#fff;
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 0 0 4px rgba(255,255,255,0.08) inset;
+  outline:none;
+}
+#service .mini-input{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  opacity:0.0001; cursor:pointer;
+}
+#service .mini-prompt{
+  text-align:center; color:#fff; pointer-events:none;
+  padding:1rem;
+}
+#service .mini-prompt i{ font-size:1.6rem; margin-bottom:.5rem; opacity:.9; display:block; }
+#service .mini-prompt .filename{
+  display:block; margin-top:.35rem; max-width:100%;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  opacity:.9;
+}

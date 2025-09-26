@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- META -->
+  <meta charset="utf-8">
+  <meta name="robots" content="noodp">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  <!-- PAGE TITLE -->
+  <title>GSDeep - One Page</title>
+
+  <!-- FAVICON -->
+  <link rel="shortcut icon" href="assets/img/favicon.png">
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+
+  <!-- STYLESHEETS -->
+  <link rel="stylesheet" type="text/css" href="assets/css/plugins.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+
+  <!-- API BASE 설정 (반드시 main.js 보다 먼저) -->
+  <script src="/config.js?v=deploy-001"></script>
+</head>
+
+<body>
+  <!-- PRELOADER -->
+  <div class="preloader">
+    <div class="spinner"></div>
+  </div>
+  <!-- /PRELOADER -->
+
+  <!-- NAVIGATION -->
+  <nav class="navigation-main">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+          <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+        <a class="navbar-brand" href="#"><img class="img-responsive" src="assets/img/navigation-logo.png" alt="" /></a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="navigation-items nav navbar-nav navbar-right">
+          <li class="current"><a href="#intro">Home</a></li>
+          <li><a href="#about">Our Tech</a></li>
+          <li><a href="#service">Services</a></li>
+          <li><a href="#work">Story</a></li>
+          <li><a href="#clients">Our Vision</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- /NAVIGATION -->
+
+  <!-- INTRO -->
+  <section id="intro">
+    <div class="container-mid text-center">
+      <div class="animation-container animation-fade-down" data-animation-delay="0">
+        <h1>We are <strong>GSDeep</strong><br>Let's find out!</h1>
+      </div>
+      <div class="animation-container animation-fade-up" data-animation-delay="300">
+        <p class="subline">About us</p>
+        <a href="#about" class="scroll-down smooth-scroll"><i class="fa fa-long-arrow-down" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </section>
+  <!-- /INTRO -->
+
+  <!-- ABOUT -->
+  <section id="about" class="white">
+    <div class="container-fluid text-center">
+      <h3 class="headline scroll-animated-from-bottom">Our Tech</h3>
+      <p class="subline scroll-animated-from-bottom">
+        이미지와 txt 입력만으로 감정 표현이 가능한 AI 페르소나를 생성하는 상호작용형 콘텐츠 시스템입니다. <br>
+        대표적으로 DeepFake, DeepVocie, TTS 기술을 연결하여 하나의 구조를 만드는 것을 목표로 합니다.
+      </p>
+
+      <div class="col-sm-4 text-left about-item scroll-animated-from-bottom">
+        <img class="img-responsive" src="assets/img/about/about-1.jpg" alt="image">
+        <p>딥러닝 기반 생성 모델(GAN, SadTalker, Wav2Lip, DeepFaceLab)을 사용해 기존 이미지나 영상을 다른 인물의 얼굴·표정으로 합성하는 기술</p>
+      </div>
+
+      <div class="col-sm-4 text-left about-item scroll-animated-from-bottom">
+        <img class="img-responsive" src="assets/img/about/about-2.jpg" alt="image">
+        <p>CNN 기반 음성 합성 기술로, 화자의 음색·발음을 학습해 특정 인물의 목소리를 재현하거나 새로운 음성을 생성하는 기술</p>
+      </div>
+
+      <div class="col-sm-4 text-left about-item scroll-animated-from-bottom">
+        <img class="img-responsive" src="assets/img/about/about-3.jpg" alt="image">
+        <p>LLM와 음성 합성 모델을 통해 입력된 텍스트 데이터를 사람의 음성처럼 변환하는 기술</p>
+      </div>
+    </div>
+  </section>
+  <!-- /ABOUT -->
+
+  <!-- SERVICE -->
+  <section id="service">
+    <div class="container-fluid text-center">
+      <h3 class="headline scroll-animated-from-bottom">Upload Image</h3>
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-sm-12">
+          <form id="service-upload" class="upload-panel scroll-animated-from-bottom" action="/api/upload" method="POST" enctype="multipart/form-data">
+            <div id="drop-zone" class="upload-drop" tabindex="0" aria-label="파일 업로드 영역">
+              <input type="file" id="file-input" name="file" class="upload-input" aria-label="파일 선택" />
+              <div class="upload-prompt">
+                <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                <p class="m-0"><strong>파일을 끌어다 놓거나 클릭</strong>하여 선택하세요</p>
+                <small class="d-block">이미지 / 동영상 / PDF </small>
+              </div>
+              <!-- 미리보기 이미지 -->
+              <img id="upload-preview" class="upload-preview" alt="미리보기" />
+              <!-- 결과 비디오(직접 로드용) -->
+              <video id="result-video" class="upload-preview" style="display:none" controls playsinline></video>
+            </div>
+
+            <div class="upload-meta">
+              <div class="meta-row">
+                <!-- 80%: 텍스트 -->
+                <div class="meta-text">
+                  <textarea name="message" id="upload-message" rows="6" placeholder="이야기나 텍스트를 입력해보세요."></textarea>
+                </div>
+
+                <!-- 20%: WAV 업로드 (작은 드롭존) -->
+                <div class="meta-audio">
+                  <div id="audio-drop" class="mini-drop" tabindex="0" aria-label="mp3/wav 파일 업로드">
+                    <input type="file" id="audio-input" name="audio" accept=".wav,audio/wav,.mp3,audio/mpeg"  class="mini-input" aria-label="WAV/MP3 파일 선택" required>
+                    <div class="mini-prompt">
+                      <i class="fa fa-microphone" aria-hidden="true"></i>
+                      <p class="m-0"><strong>음성파일 업로드</strong></p>
+                      <small class="d-block">wav/mp3 파일 드래그/클릭</small>
+                      <small id="audio-filename" class="filename"></small>
+                    </div>
+                  </div>
+                  <audio id="audio-preview" controls style="display:none; width:100%; margin-top:.6rem"></audio>
+                </div>
+              </div>
+            </div>
+
+            <div class="upload-actions">
+              <div class="voice-controls">
+                <div class="h-wrap">
+                  <label for="voice-level" class="sr-only">음량(−20~20)</label>
+                  <input id="voice-level" class="h-range" type="range" name="voice_level" min="-20" max="20" step="1" value="0" aria-label="음량"/>
+                  <output id="voice-level-value" class="h-readout">0</output>
+                </div>
+
+                <label class="sr-only" for="voice-gender">성별</label>
+                <div class="pill-select pill-select--primary">
+                  <select id="voice-gender" name="voice_gender" required>
+                    <option value="" disabled selected>SELECT</option>
+                    <option value="male">남성</option>
+                    <option value="female">여성</option>
+                  </select>
+                </div>
+
+                <label class="sr-only" for="voice-age">연령대</label>
+                <div class="pill-select pill-select--ghost">
+                  <select id="voice-age" name="voice_age" required>
+                    <option value="" disabled selected>SELECT</option>
+                    <option value="young">청년</option>
+                    <option value="middle">중년</option>
+                    <option value="old">노년</option>
+                  </select>
+                </div>
+              </div>
+
+              <button type="submit" class="upload-btn">전송</button>
+              <span id="upload-status" class="upload-status" role="status" aria-live="polite"></span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /SERVICE -->
+
+  <!-- WORK -->
+  <section id="work" class="white">
+    <div class="container-fluid text-center">
+      <h3 class="headline scroll-animated-from-bottom">Our Story</h3>
+
+      <div class="work-carousel owl-carousel scroll-animated-from-bottom">
+        <div class="item">
+          <div class="bg-image" style="background-image: url(assets/img/work/work-1.jpg)"></div>
+          <a class="info" href="#" data-featherlight="#item-1-lightbox">
+            <div class="container-mid">
+              <h5>이순신</h5>
+              <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+            </div>
+          </a>
+          <div class="lightbox-wrapper">
+            <div id="item-1-lightbox" class="work-lightbox">
+              <video class="lightbox-video" src="assets/video/work-1.mp4" controls preload="metadata" playsinline poster="assets/img/work/work-1.jpg"></video>
+              <div class="description">
+                <h3>이순신</h3>
+                <p class="subline">난중일기</p>
+                <p>“이 책에 쓰인 승전은 내 재주가 아님을 알아야 한다. 바람이 불어 돛이 움직이고, 물결이 도와 배가 나아간 것처럼, 병사들의 땀과 피가 있었고, 하늘의 뜻이 있었을 따름이다.”</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="bg-image" style="background-image: url(assets/img/work/work-2.jpg)"></div>
+          <a class="info" href="#" data-featherlight="#item-2-lightbox">
+            <div class="container-mid">
+              <h5>유관순</h5>
+              <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+            </div>
+          </a>
+          <div class="lightbox-wrapper">
+            <div id="item-2-lightbox" class="work-lightbox">
+              <video class="lightbox-video" src="assets/video/work-2.mp4" controls preload="metadata" playsinline poster="assets/img/work/work-2.jpg"></video>
+              <div class="description">
+                <h3>유관순</h3>
+                <p class="subline">민중의 함성</p>
+                <p>“저는 제 나라의 독립을 위해 마땅히 해야 할 일을 했을 뿐입니다.”</p>
+                <p>“나라를 사랑하는 마음으로 한 일이니, 결코 부끄럽지 않습니다.”</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="bg-image" style="background-image: url(assets/img/work/work-3.jpg)"></div>
+          <a class="info" href="#" data-featherlight="#item-3-lightbox">
+            <div class="container-mid">
+              <h5>아인슈타인</h5>
+              <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+            </div>
+          </a>
+          <div class="lightbox-wrapper">
+            <div id="item-3-lightbox" class="work-lightbox">
+              <video class="lightbox-video" src="assets/video/work-3.mp4" controls preload="metadata" playsinline poster="assets/img/work/work-3.jpg"></video>
+              <div class="description">
+                <h3>아인슈타인</h3>
+                <p class="subline">상대성 이론</p>
+                <p>현재 준비중입니다...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="bg-image" style="background-image: url(assets/img/work/work-4.jpg)"></div>
+          <a class="info" href="#" data-featherlight="#item-4-lightbox">
+            <div class="container-mid">
+              <h5>베토벤</h5>
+              <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+            </div>
+          </a>
+          <div class="lightbox-wrapper">
+            <div id="item-4-lightbox" class="work-lightbox">
+              <video class="lightbox-video" src="assets/video/work-4.mp4" controls preload="metadata" playsinline poster="assets/img/work/work-4.jpg"></video>
+              <div class="description">
+                <h3>베토벤</h3>
+                <p class="subline">운명</p>
+                <p>현재 준비중입니다...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="bg-image" style="background-image: url(assets/img/work/work-5.jpg)"></div>
+          <a class="info" href="#" data-featherlight="#item-5-lightbox">
+            <div class="container-mid">
+              <h5>세종대왕</h5>
+              <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+            </div>
+          </a>
+          <div class="lightbox-wrapper">
+            <div id="item-5-lightbox" class="work-lightbox">
+              <video class="lightbox-video" src="assets/video/work-5.mp4" controls preload="metadata" playsinline poster="assets/img/work/work-5.jpg"></video>
+              <div class="description">
+                <h3>세종대왕</h3>
+                <p class="subline">나랏말싸미 - 현대어</p>
+                <p>우리나라 말이 중국과 달라, 한자로는 서로 뜻을 통하지 못하니 이 때문에 백성들이 말하고자 하는 바가 있어도 글로 표현하지 못해 답답해한다.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /work-carousel -->
+    </div>
+  </section>
+  <!-- /WORK -->
+
+  <!-- CLIENTS -->
+  <section id="clients">
+    <div class="container-fluid text-center">
+      <h3 class="headline scroll-animated-from-bottom">Differences / Our Vision</h3>
+
+    <div class="client-feedback">
+      <div class="client-feedback-item row">
+        <div class="col-sm-4 text-left scroll-animated-from-bottom">
+          <img class="img-responsive logo client-gif" src="assets/img/clients/book.gif" alt="demo gif">
+        </div>
+        <div class="col-sm-8 text-left scroll-animated-from-bottom">
+          <p></p>
+          <p> ● 우리는 다른 프로젝트와 달리 단순히 목소리나 영상을 합성하는 데서 멈추지 않습니다.
+            여러 기술을 하나의 흐름으로 연결해 이미지와 텍스트만으로 생생한 하나의 이야기를 들려주는 새로운 경험을 제공합니다.</p>
+          <p> ● 누구나 손쉽게 자신만의 AI 페르소나를 창조할 수 있으며 이 기술과 소통하는 새로운 창구로 활용될 수 있습니다.</p>
+          <p> ● 이를 통해 교육, 상담, 방송, 콘텐츠 제작 등 다양한 분야에서 사람과 기술이 더 가까워지는 미래를 열어갑니다.</p>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+  <!-- /CLIENTS -->
+
+  <!-- FOOTER -->
+  <section id="footer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6 scroll-animated-from-bottom text-left">
+          <p>© 2017 Your Brand | Design by <a href="https://templatefoundation.com">Template Foundation</a></p>
+        </div>
+        <div class="col-sm-6 scroll-animated-from-bottom text-right">
+          <ul class="social-icons">
+            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /FOOTER -->
+
+  <!-- BACKGROUND CONTENT -->
+  <div class="background-content parallax-on">
+    <div class="background-content-inner">
+      <div class="background-overlay"></div>
+      <div class="background-img layer" data-depth="0.1"></div>
+    </div>
+  </div>
+  <!-- /BACKGROUND CONTENT -->
+
+  <!-- JAVASCRIPTS -->
+  <script type="text/javascript" src="assets/js/plugins.js"></script>
+
+  <!-- 음성 슬라이드바 -->
+  <script>
+    (function(){
+      const slider = document.getElementById('voice-level');
+      const out    = document.getElementById('voice-level-value');
+      const gender = document.getElementById('voice-gender');
+
+      if(!slider || !out) return;
+
+      const clamp = v => Math.min(Math.max(v, parseFloat(slider.min)), parseFloat(slider.max));
+      const sync  = () => { out.textContent = slider.value; };
+
+      slider.addEventListener('input', sync);
+      slider.addEventListener('change', sync);
+      sync();
+
+      if(gender){
+        const applyByGender = () => {
+          let target = null;
+          if (gender.value === 'male')   target = -6;
+          else if (gender.value === 'female') target = 6;
+          if (target !== null) {
+            slider.value = clamp(target);
+            slider.dispatchEvent(new Event('input', { bubbles: true }));
+          }
+        };
+        gender.addEventListener('change', applyByGender);
+        if (gender.value === 'male' || gender.value === 'female') {
+          applyByGender();
+        }
+      }
+    })();
+  </script>
+
+  <!-- 새 main.js (중복 로딩 주의: assets/js/main.js는 제거) -->
+  <script src="main.js"></script>
+</body>
+</html>
