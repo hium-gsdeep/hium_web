@@ -1,0 +1,12 @@
+[submodule "Applio"]
+	path = Applio
+	url = https://github.com/HB674/Applio.git
+[submodule "Sadtalker"]
+	path = Sadtalker
+	url = https://github.com/HB674/SadTalker.git
+[submodule "Wav2lip"]
+	path = Wav2lip
+	url = https://github.com/HB674/Wav2Lip.git
+[submodule "Gfpgan"]
+	path = Gfpgan
+	url = https://github.com/HB674/GFPGAN.git
