@@ -1,0 +1,35 @@
+FROM python:3.10-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    LANG=C.UTF-8 LC_ALL=C.UTF-8 \
+    DEBIAN_FRONTEND=noninteractive
+
+WORKDIR /app
+
+# curl (healthcheck 용), ffmpeg, sox 추가 설치
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    ffmpeg \
+    sox \
+    libsox-fmt-all \
+    ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+
+# Python 패키지
+RUN python -m pip install --upgrade pip && \
+    pip install --no-cache-dir \
+      fastapi \
+      "uvicorn[standard]" \
+      python-multipart \
+      python-dotenv \
+      aiofiles \
+      httpx \
+      tenacity
+
+
+COPY . /app
+
+EXPOSE 8000
+
+CMD ["python3", "-m", "uvicorn", "pipeline_api_server:app", "--host", "0.0.0.0", "--port", "8000"]
