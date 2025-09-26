@@ -1,0 +1,105 @@
+services:
+  pipeline_api_server:
+    build:
+      context: ./Pipeline  
+      dockerfile: Dockerfile.pipeline
+    container_name: pipeline_api
+    ports:
+      - "8000:8000"
+    environment:
+      - SHARED_DIR=/app/shared_data_workspace
+    volumes:
+      - ./shared_data_workspace:/app/shared_data_workspace
+    depends_on:
+      - applio_api_server
+      - sadtalker_api_server
+      - wav2lip_api_server
+      - gfpgan_api_server
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 20s
+      timeout: 3s
+      retries: 10
+
+  applio_api_server:
+    build:
+      context: ./Applio
+      dockerfile: Dockerfile.applio
+    container_name: applio_api
+    ports:
+      - "8001:8001"
+    environment:
+      - SHARED_DIR=/app/shared_data_workspace
+      - VOICE_DIR=/app/voice_model
+      - LOGS_DIR=/app/logs
+    volumes:
+      - ./shared_data_workspace:/app/shared_data_workspace
+      - ./voice_model:/app/voice_model:ro
+    gpus: all
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 20s
+      timeout: 3s
+      retries: 10
+
+  sadtalker_api_server:
+    build:
+      context: ./Sadtalker
+      dockerfile: Dockerfile.sadtalker
+    container_name: sadtalker_api
+    ports:
+      - "8002:8002"
+    environment:
+      - SHARED_DIR=/app/shared_data_workspace
+    volumes:
+      - ./shared_data_workspace:/app/shared_data_workspace:rw
+      - ./Sadtalker/checkpoints:/app/checkpoints:ro
+      - ./Sadtalker/gfpgan:/app/gfpgan:ro   # (옵션) GFPGAN 모델
+    gpus: all
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+      interval: 20s
+      timeout: 3s
+      retries: 10
+
+  wav2lip_api_server:
+    build:
+      context: ./Wav2lip
+      dockerfile: Dockerfile.wav2lip
+    container_name: wav2lip_api
+    ports:
+      - "8003:8003"
+    environment:
+      - SHARED_DIR=/app/shared_data_workspace
+    volumes:
+      - ./shared_data_workspace:/app/shared_data_workspace:rw
+      - ./Wav2lip/checkpoints:/app/checkpoints:ro
+    gpus: all
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8003/health"]
+      interval: 20s
+      timeout: 3s
+      retries: 10
+
+  gfpgan_api_server:
+    build:
+      context: ./Gfpgan
+      dockerfile: Dockerfile.gfpgan
+    container_name: gfpgan_api
+    ports:
+      - "8004:8004"
+    environment:
+      - SHARED_DIR=/app/shared_data_workspace
+    volumes:
+      - ./shared_data_workspace:/app/shared_data_workspace:rw
+    gpus: all
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8004/health"]
+      interval: 20s
+      timeout: 3s
+      retries: 10
