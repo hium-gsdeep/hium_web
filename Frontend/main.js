@@ -111,9 +111,10 @@ jQuery(document).ready(function($) {
     $preview.hide().attr('src','');
     $prompt.show();
 
-    // ★ 추가: 결과 비디오도 숨기고 src 제거
-    var $vid = $('#result-video');
-    if ($vid.length) $vid.hide().attr('src','');
+    // 추가result == 주석 처리함
+    // // ★ 추가: 결과 비디오도 숨기고 src 제거
+    // var $vid = $('#result-video');
+    // if ($vid.length) $vid.hide().attr('src','');
   }
   function showImgPreview(file){
     if(!file){ resetImgPreview(); return; }
@@ -334,7 +335,9 @@ jQuery(document).ready(function($) {
       const finalUrl = buildFileUrl(finalRel);
       $status.text('완료!');
       if (typeof playResult === 'function') {
-        playResult(finalUrl);
+        // playResult(finalUrl);
+        // 서비스 텍스트 입력칸 내용을 subline으로 전달  == 추가 result
+        playResult(finalUrl, { subline: $message && $message.val ? $message.val() : '' });
       } else {
         console.log('FINAL:', finalUrl);
       }
@@ -371,24 +374,89 @@ jQuery(document).ready(function($) {
   resetImgPreview();
 });
 
-function playResult(url){
-  var $vid    = $('#result-video');
-  var $img    = $('#upload-preview');
-  var $prompt = $('#drop-zone .upload-prompt');
+// 추가 result
+// === 라이트박스 오픈 (.work-lightbox 규격 준수) ===
+function openVideoLightbox({ src, poster = '', title = '', subline = '' }) {
+  if (!src) { alert('동영상 주소를 찾을 수 없습니다.'); return; }
 
-  if ($vid.length) {
-    if ($prompt.length) $prompt.hide();
-    if ($img.length) {
-      $img.hide().attr('src',''); // 이미지 미리보기 감춤
-    }
-    // 비디오 보여주고 로드
-    $vid.attr('src', url).show()[0].load();
+  const safe = (s) => String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 
-    // 사용자가 바로 보도록 서비스 섹션으로 스크롤(선택)
-    var service = document.getElementById('service');
-    if (service) service.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const content = `
+    <div class="work-lightbox">
+      <video class="lightbox-video" src="${safe(src)}" controls preload="metadata" playsinline ${poster ? `poster="${safe(poster)}"` : ''}></video>
+      <div class="description">
+        ${title ? `<h3>${safe(title)}</h3>` : ''}
+        ${subline ? `<p class="subline">${safe(subline)}</p>` : ''}
+      </div>
+    </div>
+  `;
+
+  if (window.jQuery && window.jQuery.featherlight) {
+    window.jQuery.featherlight(content, {
+      persist: false,
+      closeOnEsc: true,
+      closeOnClick: 'anywhere',
+      afterContent() {
+        const v = this.$content.find('video').get(0);
+        if (v) v.play().catch(()=>{});  // 자동재생 시도(정책에 따라 무음일 때만 재생될 수 있음)
+        // 포커스 접근성
+        if (v) v.focus({ preventScroll: true });
+      }
+    });
   } else {
-    // 비상: 결과 자리 없으면 새 탭으로라도
-    window.open(url, '_blank', 'noopener');
+    // Featherlight 미사용일 때의 간단 대체(원하면 삭제 가능)
+    const overlay = document.createElement('div');
+    overlay.className = 'featherlight featherlight-open'; // 최소한 비슷한 클래스
+    overlay.innerHTML = `
+      <div class="featherlight-content">
+        ${content}
+        <button type="button" class="featherlight-close-icon" aria-label="닫기">✕</button>
+      </div>
+    `;
+    Object.assign(overlay.style, { position:'fixed', inset:'0', background:'rgba(0,0,0,.7)', zIndex:9999, display:'flex', alignItems:'center', justifyContent:'center' });
+    document.body.appendChild(overlay);
+    overlay.querySelector('.featherlight-close-icon').onclick = () => overlay.remove();
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
+    const v = overlay.querySelector('video');
+    if (v) v.play().catch(()=>{});
   }
+}
+// 여기까지
+
+function playResult(url, opts = {}){
+
+  // 추가result 새로 추가 한거 
+  const {
+    title = 'Result',
+    subline = '',
+    poster = ''
+  } = opts;
+
+  openVideoLightbox({
+    src: url,
+    poster,
+    title,
+    subline
+  });
+
+  // 추가result == 원래 있던거
+  // var $vid    = $('#result-video');
+  // var $img    = $('#upload-preview');
+  // var $prompt = $('#drop-zone .upload-prompt');
+
+  // if ($vid.length) {
+  //   if ($prompt.length) $prompt.hide();
+  //   if ($img.length) {
+  //     $img.hide().attr('src',''); // 이미지 미리보기 감춤
+  //   }
+  //   // 비디오 보여주고 로드
+  //   $vid.attr('src', url).show()[0].load();
+
+  //   // 사용자가 바로 보도록 서비스 섹션으로 스크롤(선택)
+  //   var service = document.getElementById('service');
+  //   if (service) service.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // } else {
+  //   // 비상: 결과 자리 없으면 새 탭으로라도
+  //   window.open(url, '_blank', 'noopener');
+  // }
 }

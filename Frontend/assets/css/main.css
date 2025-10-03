@@ -1688,9 +1688,6 @@ section .headline
 #service .h-range:focus{ outline:none; }
 #service .h-range:hover{ filter:none; }
 
-
-
-
 /* === Service: 텍스트 80 / WAV 20 분할 === */
 #service .meta-row{
   display:flex; gap:14px; align-items:stretch;
@@ -1698,11 +1695,6 @@ section .headline
 #service .meta-text{ flex: 0 1 80%; }
 #service .meta-audio{ flex: 0 1 20%; min-width: 180px; }
 
-/* 반응형: 모바일에서는 세로 스택 */
-@media (max-width: 992px){
-  #service .meta-row{ flex-direction:column; }
-  #service .meta-text, #service .meta-audio{ flex-basis:100%; min-width:0; }
-}
 
 /* textarea 높이/스타일 보강 */
 #service .meta-text textarea{
@@ -1751,3 +1743,92 @@ section .headline
   overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
   opacity:.9;
 }
+
+
+/* === 태블릿/모바일: 세로 스택 === */
+@media (max-width: 992px){
+  /* 텍스트 80 / WAV 20 → 세로 100 / 100 */
+  #service .meta-row{ flex-direction: column; gap: 10px; }
+  #service .meta-text, #service .meta-audio{ flex: 0 0 100%; min-width: 0; }
+
+  /* 높이 살짝 줄이기 */
+  #service .meta-text textarea{
+    min-height: clamp(120px, 28vw, 180px);
+  }
+  #service .mini-drop{ min-height: 120px; }
+
+  /* 슬라이더는 한 줄 꽉 채우기 */
+  #service .h-wrap{ width: 100%; }
+  #service .voice-controls{ width:100%; justify-content:center; }
+}
+
+/* === 작은 모바일: 터치 타깃/여백 최적화 === */
+@media (max-width: 720px){
+  #service .pill-select select{
+    height: 40px; line-height: 40px; padding: 0 40px 0 14px;
+  }
+  #service .h-readout{ font-size: 11px; }
+  #service .upload-btn{ width: 20%; }        /* 버튼 한 줄 꽉 */
+  #service #audio-preview{ width:20%; }      /* 오디오 플레이어 폭 고정 */
+}
+
+/* Mobile: #about, #clients 설명 왼쪽 정렬 */
+@media (max-width: 768px) {
+  /* #about */
+  #about .subline,
+  #about p { 
+    text-align: left !important;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  /* #clients */
+  #clients .subline,
+  #clients p {
+    text-align: left !important;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+/* === 최종 오버라이드: Mobile(≤992px) 8:2 + 동일 높이 === */
+@media (max-width: 720px){
+  /* 가로 8:2 유지 (gap=14px → 각 칼럼에서 7px 보정) */
+  #service .meta-row{
+    display:flex !important;
+    flex-direction:row !important;
+    flex-wrap:nowrap !important;
+    gap:14px;
+    align-items:stretch !important;
+  }
+  #service .meta-row > .meta-text{
+    flex:0 0 calc(80% - 7px) !important;
+    min-width:0 !important;
+    display:flex; /* 안의 textarea를 높이 맞추기 위해 */
+  }
+  #service .meta-row > .meta-audio{
+    flex:0 0 calc(20% - 7px) !important;
+    min-width:0 !important;
+    display:flex; /* 안의 .mini-drop을 높이 맞추기 위해 */
+  }
+
+  /* 🔧 자식 25px 강제된 규칙 무력화 */
+  #service .meta-text > *,
+  #service .meta-audio > *{
+    height:auto !important;
+  }
+
+  /* 두 칸의 콘텐츠 최소 높이를 '같게' 고정 */
+  #service .meta-text textarea{
+    min-height: 140px !important;
+    height: auto !important;
+    width:100%;
+    box-sizing:border-box;
+  }
+  #service .mini-drop{
+    min-height: 140px !important;
+    width:100%;
+    box-sizing:border-box;
+  }
+}
+
