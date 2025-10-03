@@ -1744,6 +1744,43 @@ section .headline
   opacity:.9;
 }
 
+.help-icon {
+  position: absolute;
+  top: 20px;   /* service 창 기준으로 오른쪽 위 */
+  right: 20px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.8);
+  color: #333;
+  text-align: center;
+  line-height: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.help-icon .tooltip-text {
+  visibility: hidden;
+  width: 300px;
+  background: rgba(49, 49, 49, 0.9);
+  color: #fff;
+  text-align: left;
+  border: 2px dashed rgba(255,255,255,0.35);
+  border-radius: 16px;
+  padding: 10px;
+  position: absolute;
+  overflow: hidden;
+  top: 35px;
+  right: 0;
+  z-index: 10;
+  font-size: 13px;
+}
+
+.help-icon:hover .tooltip-text {
+  visibility: visible;
+}
+
 
 /* === 태블릿/모바일: 세로 스택 === */
 @media (max-width: 992px){
